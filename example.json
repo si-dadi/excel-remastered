@@ -1,0 +1,59 @@
+{
+    "name": "Company",
+    "dam":"",
+    "employees": [
+      {
+        "id": 1,
+        "name": "John Doe",
+        "position": "Manager",
+        "department": {
+          "name": "Engineering",
+          "location": "Building A"
+        }
+      },
+      {
+        "id": 2,
+        "name": "Jane Smith",
+        "position": "Developer",
+        "department": {
+          "name": "Marketing",
+          "location": "Building B"
+        }
+      }
+    ],
+    "projects": [
+      {
+        "projectId": "P001",
+        "projectName": "Project X",
+        "team": [
+          {
+            "id": 3,
+            "name": "Bob Johnson",
+            "position": "Designer"
+          },
+          {
+            "id": 4,
+            "name": "Alice Brown",
+            "position": "Tester"
+          }
+        ]
+      },
+      {
+        "projectId": "P002",
+        "projectName": "Project Y",
+        "team": [
+          {
+            "id": 5,
+            "name": "Charlie Wilson",
+            "position": "Analyst"
+          },
+          {
+            "id": 6,
+            "name": "Eva Davis",
+            "position": "Developer"
+          }
+        ]
+      }
+    ]
+  }
+  

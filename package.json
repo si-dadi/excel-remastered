@@ -1,0 +1,27 @@
+{
+  "name": "excel-remastered",
+  "version": "0.0.1",
+  "description": "Node package for better readability of complex nested JSON data downloaded as excel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/si-dadi/excel-remastered.git"
+  },
+  "keywords": [
+    "Excel",
+    "JSON",
+    "Node.js",
+    "Data-Visualization",
+    "formatting",
+    "convert"
+  ],
+  "author": "si-dadi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/si-dadi/excel-remastered/issues"
+  },
+  "homepage": "https://github.com/si-dadi/excel-remastered#readme"
+}
