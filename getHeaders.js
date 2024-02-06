@@ -75,20 +75,32 @@ function arrangeHeaders(attributes) {
 }
 
 function removeDuplicatesInSubArrays(csvArray) {
-  csvArray.forEach((subArray, i) => {
+  const uniqueValuesFirstSubArray = new Set();
+  
+  // Process subsequent sub-arrays
+  for (let i = 1; i < csvArray.length; i++) {
     const uniqueValues = new Set();
-
-    for (let j = 0; j < subArray.length; j++) {
-      const element = subArray[j];
-
-      if (element !== "") {
-        if (i > 0 && uniqueValues.has(element) && csvArray[i - 1][j] !== "") {
-          subArray[j] = "";
+    
+    csvArray[i].forEach((element, j) => {
+      // Check for duplicates within the sub-array fragment and reset if necessary
+      if (element !== "" && csvArray[i - 1][j] !== "") {
+        if (uniqueValues.has(element)) {
+          csvArray[i][j] = "";
         } else {
           uniqueValues.add(element);
         }
       }
-    }
+    });
+  }
+  // Process the first sub-array
+  csvArray[0].forEach((element, j) => {
+      if (j > 0) {
+          if (uniqueValuesFirstSubArray.has(element)) {
+              csvArray[0][j] = "";
+          } else {
+              uniqueValuesFirstSubArray.add(element);
+          }
+      }
   });
 }
 
