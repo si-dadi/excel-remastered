@@ -5,8 +5,6 @@ Node package for better readability of complex nested JSON data downloaded as ex
 ## Using the package
 ```
 const convert_to_excel = require("excel-remastered");
-const fs = require("fs");
-
 
 convert_to_excel(inputJsonFile, outputCsvFile)
 ```
