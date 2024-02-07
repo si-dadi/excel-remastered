@@ -1,4 +1,7 @@
-function getBody(jsonObjects: object[], headers: string[]): string[][] {
+function getBody(jsonObjects: object | object[], headers: string[]): string[][] {
+  if (!Array.isArray(jsonObjects)) {
+    jsonObjects = [jsonObjects];
+  }
 
   function dfs(obj: object, path: string[]): any {
     let value: any = obj;
@@ -22,7 +25,7 @@ function getBody(jsonObjects: object[], headers: string[]): string[][] {
     return value;
   }
 
-  let csvBodyArray: any[][] = jsonObjects.map((obj) => {
+  let csvBodyArray: any[][] = (jsonObjects as object[]).map((obj) => { // Type assertion
     const row: any[] = headers.map((header) => {
       return dfs(obj, header.split('.'));
     });
