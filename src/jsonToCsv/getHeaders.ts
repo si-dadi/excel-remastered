@@ -1,5 +1,3 @@
-import fs from 'fs';
-
 interface Attributes {
   [key: string]: any;
 }
@@ -124,13 +122,10 @@ function removeDuplicatesInSubArrays(csvArray: string[][]): void {
   });
 }
 
-function getHeaders(filePath: string): { csvHeadersArray: string[][]; headers: string[] } {
-  const jsonString = fs.readFileSync(filePath, 'utf-8');
-  const nestedJson = JSON.parse(jsonString);
-
-  const flattenedAttributes = flattenAttributes(nestedJson);
-  const headers = modifyAttributes(flattenedAttributes); // Modify attributes
-  const csvHeadersArray = arrangeHeaders(headers);
+function getHeaders(jsonObject: object): { csvHeadersArray: string[][]; headers: string[] } {
+  const flattenedAttributes = flattenAttributes(jsonObject); // extract all attributes from the json object
+  const headers = modifyAttributes(flattenedAttributes); // get all unique headers as an array
+  const csvHeadersArray = arrangeHeaders(headers); // arrange them in the required formatting for csv
 
   removeDuplicatesInSubArrays(csvHeadersArray);
 

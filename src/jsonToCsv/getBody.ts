@@ -1,8 +1,4 @@
-import fs from 'fs';
-
-function getBody(filePath: string, headers: string[]): string[][] {
-  const jsonString: string = fs.readFileSync(filePath, 'utf-8');
-  const jsonObjects: object[] = JSON.parse(jsonString);
+function getBody(jsonObjects: object[], headers: string[]): string[][] {
 
   function dfs(obj: object, path: string[]): any {
     let value: any = obj;

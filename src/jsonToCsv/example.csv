@@ -1,0 +1,9 @@
+name,dam,employees,,,,,projects,,,,,nullValue,nestedArray,,,emptyString,numberValue,booleanValue,stringValue,mixedDataTypes,newAttribute,newNestedAttribute,
+,,id,name,position,department,,projectId,projectName,team,,,,0,1,2,,,,,,,key1,key2
+,,,,,name,location,,,id,name,position
+
+Tech Solutions Inc.,12/12/2023,["1"|"2"],["John Doe"|"Jane Smith"],["Manager"|"Developer"],["Engineering"|"Marketing"],["Building A"|"Building B"],["P001"|"P002"],["Project X"|"Project Y"],["3"|"4"|"5"|"6"],["Bob Johnson"|"Alice Brown"|"Charlie Wilson"|"Eva Davis"],["Designer"|"Tester"|"Analyst"|"Developer"],null,["null"|"null"|"null"|"a"|"b"|"c"|"null"|"null"|"null"],["null"|"null"|"null"|"null"|"null"|"null"|"null"|"null"|"null"],["null"|"null"|"null"|"null"|"null"|"null"|"null"|"null"|"null"],null,123,true,Hello World,["123"|"abc"|"true"|"null"],New Value,null,null
+Innovate Corp.,null,["1"],["Michael Anderson"],["Manager"],["Research"],["Building C"],["P003"],["Project Z"],[],[],[],null,["x"|"y"|"z"],["null"|"null"|"null"],["null"|"null"|"null"],null,null,null,null,null,null,value1,value2
+Future Tech Solutions,null,["1"],["Daniel White"],["Manager"],["null"],["null"],[],[],[],[],[],null,null,null,null,null,456,null,Goodbye,["def"|"false"],null,null,null
+Innovative Solutions Co.,Some value,[],[],[],[],[],["P004"],["Project W"],["null"],["null"],["null"],null,null,null,null,null,null,null,null,null,Another New Value,null,null
+Dynamic Development Ltd.,null,[],[],[],[],[],null,null,null,null,null,null,[],[],[],Not Empty,null,null,null,["456"|"true"|"null"],Brand New Value,null,null

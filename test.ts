@@ -1,7 +1,7 @@
-const convert_to_csv = require('./index').default;
+const excelRemastered = require('./index').default;
 
-const csvData = convert_to_csv('example.json');
-const download = convert_to_csv('example.json', 'output.csv');
+const csvData = excelRemastered.jsonToCsv('src/jsonToCsv/example.json');
+const download = excelRemastered.jsonToCsv('src/jsonToCsv/example.json', 'src/jsonToCsv/output.csv');
 
 console.log('====================================');
 console.log(download);
