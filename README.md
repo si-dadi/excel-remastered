@@ -2,6 +2,11 @@
 
 Node package for better readability of complex nested JSON data downloaded as excel
 
+### Installation
+```
+npm install excel-remastered@latest
+```
+
 ## Using the package
 
 ```
