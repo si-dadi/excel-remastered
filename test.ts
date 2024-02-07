@@ -1,4 +1,4 @@
-const excelRemastered = require('./index').default;
+import excelRemastered from './src/index';
 
 const csvData = excelRemastered.jsonToCsv('src/jsonToCsv/example.json');
 const download = excelRemastered.jsonToCsv('src/jsonToCsv/example.json', 'src/jsonToCsv/output.csv');

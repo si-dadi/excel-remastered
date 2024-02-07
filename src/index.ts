@@ -1,5 +1,5 @@
-import getHeaders from "./src/jsonToCsv/getHeaders";
-import getBody from "./src/jsonToCsv/getBody";
+import getHeaders from "./jsonToCsv/getHeaders";
+import getBody from "./jsonToCsv/getBody";
 import fs from "fs";
 
 function jsonToCsv(inputData: string | object, outputCsvFile?: string): string {

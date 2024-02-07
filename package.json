@@ -1,27 +1,37 @@
 {
   "name": "excel-remastered",
   "version": "0.2.0",
-  "description": "Javascript package for better readability of complex nested JSON data downloaded as CSV",
-  "main": "index.js",
+  "description": "Enhances readability of complex nested JSON data while converting to CSV",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/si-dadi/excel-remastered.git"
   },
   "keywords": [
-    "Excel",
     "JSON",
+    "CSV",
+    "Excel",
     "Node.js",
     "Data-Visualization",
     "formatting",
-    "convert"
+    "Convertion"
   ],
-  "author": "si-dadi",
+  "author": "Shobhan Dash <28.11.shobhan.dash@gmail.com> (https://github.com/si-dadi)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/si-dadi/excel-remastered/issues"
   },
-  "homepage": "https://github.com/si-dadi/excel-remastered#readme"
+  "homepage": "https://github.com/si-dadi/excel-remastered#readme",
+  "devDependencies": {
+    "@types/node": "^20.11.16",
+    "typescript": "^5.3.3"
+  },
+  "files": [
+    "lib/**/*"
+  ]
 }
