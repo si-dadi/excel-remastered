@@ -1,6 +1,7 @@
-{
-    "name": "Company",
-    "dam":"",
+[
+  {
+    "name": "Tech Solutions Inc.",
+    "dam": "12/12/2023",
     "employees": [
       {
         "id": 1,
@@ -54,6 +55,91 @@
           }
         ]
       }
+    ],
+    "emptyArray": [],
+    "emptyObject":{},
+    "nullValue": null,
+    "nestedArray": [
+      [1, 2, 3],
+      ["a", "b", "c"],
+      [true, false, true]
+    ],
+    "emptyString": "",
+    "numberValue": 123,
+    "booleanValue": true,
+    "stringValue": "Hello World",
+    "mixedDataTypes": [
+      123,
+      "abc",
+      true,
+      null
+    ],
+    "newAttribute": "New Value"
+  },
+  {
+    "name": "Innovate Corp.",
+    "employees": [
+      {
+        "id": 1,
+        "name": "Michael Anderson",
+        "position": "Manager",
+        "department": {
+          "name": "Research",
+          "location": "Building C"
+        }
+      }
+    ],
+    "projects": [
+      {
+        "projectId": "P003",
+        "projectName": "Project Z",
+        "team": []
+      }
+    ],
+    "nestedArray": [
+      ["x", "y", "z"]
+    ],
+    "newNestedAttribute": {
+      "key1": "value1",
+      "key2": "value2"
+    }
+  },
+  {
+    "name": "Future Tech Solutions",
+    "employees": [
+      {
+        "id": 1,
+        "name": "Daniel White",
+        "position": "Manager"
+      }
+    ],
+    "projects": [],
+    "numberValue": 456,
+    "stringValue": "Goodbye",
+    "mixedDataTypes": [
+      "def",
+      false
     ]
+  },
+  {
+    "name": "Innovative Solutions Co.",
+    "dam": "Some value",
+    "employees": [],
+    "projects": [
+      {
+        "projectId": "P004",
+        "projectName": "Project W"
+      }
+    ],
+    "booleanValue": false,
+    "newAttribute": "Another New Value"
+  },
+  {
+    "name": "Dynamic Development Ltd.",
+    "employees": [],
+    "nestedArray": [],
+    "emptyString": "Not Empty",
+    "mixedDataTypes": [456, true, null],
+    "newAttribute": "Brand New Value"
   }
-  
+]

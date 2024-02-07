@@ -8,14 +8,14 @@ function flattenAttributes(jsonObject, parentKey = "", separator = ".") {
       let fullKey = parentKey ? `${parentKey}${separator}${key}` : key;
 
       if (Array.isArray(jsonObject[key])) {
-        jsonObject[key].forEach((item) => {
+        jsonObject[key].forEach((item, index) => {
           if (typeof item === "object" && item !== null) {
             attributes = {
               ...attributes,
-              ...flattenAttributes(item, fullKey, separator),
+              ...flattenAttributes(item, `${fullKey}[${index}]`, separator), // Include array index in the key
             };
           } else {
-            attributes[fullKey] = null;
+            attributes[`${fullKey}[${index}]`] = null; // Include array index in the key
           }
         });
       } else if (
@@ -27,16 +27,24 @@ function flattenAttributes(jsonObject, parentKey = "", separator = ".") {
           ...flattenAttributes(jsonObject[key], fullKey, separator),
         };
       } else {
-        const parentKeyWithoutArray = parentKey.split("[")[0];
-        const finalKey = parentKeyWithoutArray
-          ? `${parentKeyWithoutArray}${separator}${key}`
-          : key;
-        attributes[finalKey] = null;
+        attributes[fullKey] = null;
       }
     }
   }
 
   return attributes;
+}
+
+function modifyAttributes(attributes) {
+  const modifiedAttributes = {};
+
+  for (const key in attributes) {
+    const modifiedKey = key.substring(key.indexOf(".") + 1); // Remove everything before the first "."
+    const finalKey = modifiedKey.replace(/\[\d+\]/g, ''); // Remove all occurrences of "[n]"
+    modifiedAttributes[finalKey] = attributes[key];
+  }
+
+  return modifiedAttributes;
 }
 
 function arrangeHeaders(attributes) {
@@ -76,11 +84,11 @@ function arrangeHeaders(attributes) {
 
 function removeDuplicatesInSubArrays(csvArray) {
   const uniqueValuesFirstSubArray = new Set();
-  
+
   // Process subsequent sub-arrays
   for (let i = 1; i < csvArray.length; i++) {
     const uniqueValues = new Set();
-    
+
     csvArray[i].forEach((element, j) => {
       // Check for duplicates within the sub-array fragment and reset if necessary
       if (element !== "" && csvArray[i - 1][j] !== "") {
@@ -94,26 +102,30 @@ function removeDuplicatesInSubArrays(csvArray) {
   }
   // Process the first sub-array
   csvArray[0].forEach((element, j) => {
-      if (j > 0) {
-          if (uniqueValuesFirstSubArray.has(element)) {
-              csvArray[0][j] = "";
-          } else {
-              uniqueValuesFirstSubArray.add(element);
-          }
+    if (j > 0) {
+      if (uniqueValuesFirstSubArray.has(element)) {
+        csvArray[0][j] = "";
+      } else {
+        uniqueValuesFirstSubArray.add(element);
       }
+    }
   });
 }
 
-function processJsonToCSV(filePath) {
+function getHeaders(filePath) {
   const jsonString = fs.readFileSync(filePath, "utf-8");
   const nestedJson = JSON.parse(jsonString);
 
   const flattenedAttributes = flattenAttributes(nestedJson);
-  const csvArray = arrangeHeaders(flattenedAttributes);
+  const headers = modifyAttributes(flattenedAttributes); // Modify attributes
+  const csvHeadersArray = arrangeHeaders(headers);
 
-  removeDuplicatesInSubArrays(csvArray);
+  removeDuplicatesInSubArrays(csvHeadersArray);
 
-  return csvArray;
+  // Extract keys from the headers object
+  const headersArray = Object.keys(headers);
+
+  return { csvHeadersArray, headers: headersArray };
 }
 
-module.exports = processJsonToCSV;
+module.exports = getHeaders;

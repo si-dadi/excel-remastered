@@ -1,7 +1,7 @@
 {
   "name": "excel-remastered",
-  "version": "0.0.1",
-  "description": "Node package for better readability of complex nested JSON data downloaded as excel",
+  "version": "0.1.0",
+  "description": "Javascript package for better readability of complex nested JSON data downloaded as CSV",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
