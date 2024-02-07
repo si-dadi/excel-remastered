@@ -32,21 +32,27 @@ function getBody(jsonObjects: object | object[], headers: string[]): string[][] 
     return row;
   });
 
-  function convert2DArrayToStrings(arr: any[][]): string[][] {
-    return arr.map((subArray) => {
-      return subArray.map((element) => {
-        if (Array.isArray(element)) {
-          return JSON.stringify(element.map((subElement) => String(subElement))).replace(/,/g, '|');
-        } else {
-          return String(element);
+  // Transpose the CSV data to 1NF
+  const transposedData: string[][] = [];
+  csvBodyArray.forEach(row => {
+    row.forEach((value, index) => {
+      if (Array.isArray(value)) {
+        value.forEach((element, subIndex) => {
+          if (!transposedData[subIndex]) {
+            transposedData[subIndex] = [];
+          }
+          transposedData[subIndex][index] = element === null ? '' : element;
+        });
+      } else {
+        if (!transposedData[0]) {
+          transposedData[0] = [];
         }
-      });
+        transposedData[0][index] = value === null ? '' : value;
+      }
     });
-  }
+  });
 
-  csvBodyArray = convert2DArrayToStrings(csvBodyArray);
-
-  return csvBodyArray;
+  return transposedData;
 }
 
 export default getBody;
