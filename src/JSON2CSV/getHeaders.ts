@@ -1,25 +1,37 @@
-const fs = require("fs");
+import fs from 'fs';
 
-function flattenAttributes(jsonObject, parentKey = "", separator = ".") {
-  let attributes = {};
+interface Attributes {
+  [key: string]: any;
+}
+
+function flattenAttributes(
+  jsonObject: any,
+  parentKey: string = '',
+  separator: string = '.'
+): Attributes {
+  let attributes: Attributes = {};
 
   for (let key in jsonObject) {
     if (jsonObject.hasOwnProperty(key)) {
       let fullKey = parentKey ? `${parentKey}${separator}${key}` : key;
 
       if (Array.isArray(jsonObject[key])) {
-        jsonObject[key].forEach((item, index) => {
-          if (typeof item === "object" && item !== null) {
+        jsonObject[key].forEach((item: any, index: number) => {
+          if (typeof item === 'object' && item !== null) {
             attributes = {
               ...attributes,
-              ...flattenAttributes(item, `${fullKey}[${index}]`, separator), // Include array index in the key
+              ...flattenAttributes(
+                item,
+                `${fullKey}[${index}]`,
+                separator
+              ), 
             };
           } else {
-            attributes[`${fullKey}[${index}]`] = null; // Include array index in the key
+            attributes[`${fullKey}[${index}]`] = null; 
           }
         });
       } else if (
-        typeof jsonObject[key] === "object" &&
+        typeof jsonObject[key] === 'object' &&
         jsonObject[key] !== null
       ) {
         attributes = {
@@ -35,11 +47,11 @@ function flattenAttributes(jsonObject, parentKey = "", separator = ".") {
   return attributes;
 }
 
-function modifyAttributes(attributes) {
-  const modifiedAttributes = {};
+function modifyAttributes(attributes: Attributes): Attributes {
+  const modifiedAttributes: Attributes = {};
 
   for (const key in attributes) {
-    const modifiedKey = key.substring(key.indexOf(".") + 1); // Remove everything before the first "."
+    const modifiedKey = key.substring(key.indexOf('.') + 1); // Remove everything before the first "." [for attributes of type 10.name.firstname]
     const finalKey = modifiedKey.replace(/\[\d+\]/g, ''); // Remove all occurrences of "[n]"
     modifiedAttributes[finalKey] = attributes[key];
   }
@@ -47,12 +59,12 @@ function modifyAttributes(attributes) {
   return modifiedAttributes;
 }
 
-function arrangeHeaders(attributes) {
-  const csvArray = [];
-  const levels = {};
+function arrangeHeaders(attributes: Attributes): string[][] {
+  const csvArray: string[][] = [];
+  const levels: Attributes = {};
 
   Object.keys(attributes).forEach((attribute) => {
-    const parts = attribute.split(".");
+    const parts = attribute.split('.');
     let currentLevel = levels;
 
     parts.forEach((part, index) => {
@@ -71,7 +83,7 @@ function arrangeHeaders(attributes) {
       let currentIndex = csvArray[index].length;
 
       while (currentIndex < parentIndex) {
-        csvArray[index].push("");
+        csvArray[index].push('');
         currentIndex++;
       }
 
@@ -82,18 +94,18 @@ function arrangeHeaders(attributes) {
   return csvArray;
 }
 
-function removeDuplicatesInSubArrays(csvArray) {
-  const uniqueValuesFirstSubArray = new Set();
+function removeDuplicatesInSubArrays(csvArray: string[][]): void {
+  const uniqueValuesFirstSubArray = new Set<string>();
 
   // Process subsequent sub-arrays
   for (let i = 1; i < csvArray.length; i++) {
-    const uniqueValues = new Set();
+    const uniqueValues = new Set<string>();
 
     csvArray[i].forEach((element, j) => {
       // Check for duplicates within the sub-array fragment and reset if necessary
-      if (element !== "" && csvArray[i - 1][j] !== "") {
+      if (element !== '' && csvArray[i - 1][j] !== '') {
         if (uniqueValues.has(element)) {
-          csvArray[i][j] = "";
+          csvArray[i][j] = '';
         } else {
           uniqueValues.add(element);
         }
@@ -104,7 +116,7 @@ function removeDuplicatesInSubArrays(csvArray) {
   csvArray[0].forEach((element, j) => {
     if (j > 0) {
       if (uniqueValuesFirstSubArray.has(element)) {
-        csvArray[0][j] = "";
+        csvArray[0][j] = '';
       } else {
         uniqueValuesFirstSubArray.add(element);
       }
@@ -112,8 +124,8 @@ function removeDuplicatesInSubArrays(csvArray) {
   });
 }
 
-function getHeaders(filePath) {
-  const jsonString = fs.readFileSync(filePath, "utf-8");
+function getHeaders(filePath: string): { csvHeadersArray: string[][]; headers: string[] } {
+  const jsonString = fs.readFileSync(filePath, 'utf-8');
   const nestedJson = JSON.parse(jsonString);
 
   const flattenedAttributes = flattenAttributes(nestedJson);
@@ -128,4 +140,4 @@ function getHeaders(filePath) {
   return { csvHeadersArray, headers: headersArray };
 }
 
-module.exports = getHeaders;
+export default getHeaders;
