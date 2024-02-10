@@ -1,7 +1,18 @@
 import excelRemastered from './src/index';
 
-const csvData = excelRemastered.jsonToCsv('src/jsonToCsv/example.json');
-const download = excelRemastered.jsonToCsv('src/jsonToCsv/example.json', 'src/jsonToCsv/output.csv');
+// fetch your APIs etc and give them as a parameter
+// Alt: JSON File Path can be provided as well. 
+const data = {
+    
+  "page": 1,
+  "total_results": 10000,
+  "total_pages": 500,
+  "results": []
+}
+const csvData = excelRemastered.jsonToCsv(data);
+
+// Giving the second optional parameter will write the CSV to the file path provided
+const download = excelRemastered.jsonToCsv('src/jsonToCsv/exampleData/example.json', 'src/jsonToCsv/output.csv');
 
 console.log('====================================');
 console.log(download);

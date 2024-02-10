@@ -1,6 +1,6 @@
 {
   "name": "excel-remastered",
-  "version": "0.2.0",
+  "version": "0.5.0",
   "description": "Enhances readability of complex nested JSON data while converting to CSV",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

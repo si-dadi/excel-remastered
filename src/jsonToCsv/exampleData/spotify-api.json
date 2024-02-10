@@ -1,0 +1,38 @@
+[{
+    "tracks": {
+      "href": "https://api.spotify.com/v1/albums/0sNOF9WDwhWunNAHPD3Baj/tracks?offset=0&limit=2",
+      "items": [
+        {
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3WrFJ7ztbogyGnTHbHJFl2"
+              },
+              "href": "https://api.spotify.com/v1/artists/3WrFJ7ztbogyGnTHbHJFl2",
+              "id": "3WrFJ7ztbogyGnTHbHJFl2",
+              "name": "The Beatles",
+              "type": "artist",
+              "uri": "spotify:artist:3WrFJ7ztbogyGnTHbHJFl2"
+            }
+          ],
+          "disc_number": 1,
+          "duration_ms": 185733,
+          "explicit": false,
+          "href": "https://api.spotify.com/v1/tracks/5jIzX5UFoTN7L7VSMiW0Ge",
+          "id": "5jIzX5UFoTN7L7VSMiW0Ge",
+          "is_local": false,
+          "name": "Let It Be",
+          "preview_url": "https://p.scdn.co/mp3-preview/2e24b0626c9567034fcf58bb2a27750a35532f1e",
+          "track_number": 6,
+          "type": "track",
+          "uri": "spotify:track:5jIzX5UFoTN7L7VSMiW0Ge"
+        }
+      ],
+      "limit": 2,
+      "next": "https://api.spotify.com/v1/albums/0sNOF9WDwhWunNAHPD3Baj/tracks?offset=2&limit=2",
+      "offset": 0,
+      "previous": null,
+      "total": 14
+    }
+  }
+]

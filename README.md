@@ -10,19 +10,20 @@ npm install excel-remastered@latest
 ## Using the package
 
 ```
-const excelRemastered = require("excel-remastered");
+import excelRemastered from './src/index';
 
-// provide a json file as string or a json Object directly
-const csvData = excelRemastered.jsonToCsv(inputJsonFile)
+// pass an object or array of objects or JSON file path as parameter
+const csvData = excelRemastered.jsonToCsv(data); 
 
-// if output file path is provided, the csv file will be downloaded
-const download = excelRemastered.jsonToCsv(inputJsonFile, outputCsvFile)
+// Giving the second optional parameter will write the CSV to the file path provided
+const download = excelRemastered.jsonToCsv(jsonFilePath, csvFilePath);
 
-console.log('====================================');
-console.log(csvData);
 console.log('====================================');
 console.log(download);
 console.log('====================================');
+console.log(csvData);
+console.log('====================================');
+
 ```
 
 ## Release Notes (0.2.0)
