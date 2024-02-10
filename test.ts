@@ -12,10 +12,10 @@ const data = {
 const csvData = excelRemastered.jsonToCsv(data);
 
 // Giving the second optional parameter will write the CSV to the file path provided
-const download = excelRemastered.jsonToCsv('src/jsonToCsv/exampleData/example.json', 'src/jsonToCsv/output.csv');
+const download = excelRemastered.jsonToCsv('src/jsonToCsv/exampleData/example-testing.json', 'src/jsonToCsv/output.csv');
 
 console.log('====================================');
-console.log(download);
-console.log('====================================');
 console.log(csvData);
+console.log('====================================');
+console.log(download);
 console.log('====================================');

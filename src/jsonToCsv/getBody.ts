@@ -1,11 +1,4 @@
-function getBody(jsonObjects: object | object[], headers: string[]): string[][] {
-  console.log(Array.isArray(jsonObjects), typeof jsonObjects)
-  if (!Array.isArray(jsonObjects)) {
-    // JSON.stringify(jsonObjects);
-    // jsonObjects = [jsonObjects];
-  }
-
-  console.log(Array.isArray(jsonObjects), typeof jsonObjects)
+function getBody(jsonObjects: object[], headers: string[]): string[][] {
 
   function dfs(obj: object, path: string[]): any {
     let value: any = obj;
