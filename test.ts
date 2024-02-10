@@ -23,4 +23,4 @@ console.log('====================================');
 
 // convert CSV to JSON:
 // Note: If you're using a csv file converted from JSON using this package, set the third parameter to true
-excelRemastered.csvToJson('test.csv', 'test.json', false)
+excelRemastered.csvToJson('test.csv', 'test.json', true)
