@@ -22,10 +22,12 @@ function jsonToCsv(inputData: string | object, outputCsvFile?: string): string {
   const csvBodyArray = getBody(jsonContent, headers);
 
   const csvHeaderContent = csvHeadersArray
-    .map((row: string[]) => row.join(","))
+    .map((row: string[]) => row.map(item => `"${item}"`).join(","))
     .join("\n");
 
-  const csvBodyContent = csvBodyArray.map((row: string[]) => row.join(",")).join("\n");
+  const csvBodyContent = csvBodyArray
+    .map((row: string[]) => row.map(item => `"${item}"`).join(","))
+    .join("\n");
 
   const csvContent = csvHeaderContent + "\n\n" + csvBodyContent;
 
