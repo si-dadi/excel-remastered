@@ -1,7 +1,11 @@
 function getBody(jsonObjects: object | object[], headers: string[]): string[][] {
+  console.log(Array.isArray(jsonObjects), typeof jsonObjects)
   if (!Array.isArray(jsonObjects)) {
-    jsonObjects = [jsonObjects];
+    // JSON.stringify(jsonObjects);
+    // jsonObjects = [jsonObjects];
   }
+
+  console.log(Array.isArray(jsonObjects), typeof jsonObjects)
 
   function dfs(obj: object, path: string[]): any {
     let value: any = obj;
@@ -13,13 +17,13 @@ function getBody(jsonObjects: object | object[], headers: string[]): string[][] 
         if (value.some(Array.isArray)) {
           value = value.map((item: any) => {
             if (Array.isArray(item) && item.length > 0) {
-              return JSON.stringify(item);
+              return item;
             }
             return item;
           });
         }
       } else {
-        value = (value && value[attribute]) || null;
+        value = (value !== null && value.hasOwnProperty(attribute)) ? value[attribute] : null;
       }
     });
     return value;
@@ -32,27 +36,34 @@ function getBody(jsonObjects: object | object[], headers: string[]): string[][] 
     return row;
   });
 
-  // Transpose the CSV data to 1NF
-  const transposedData: string[][] = [];
-  csvBodyArray.forEach(row => {
-    row.forEach((value, index) => {
-      if (Array.isArray(value)) {
-        value.forEach((element, subIndex) => {
-          if (!transposedData[subIndex]) {
-            transposedData[subIndex] = [];
-          }
-          transposedData[subIndex][index] = element === null ? '' : element;
-        });
-      } else {
-        if (!transposedData[0]) {
-          transposedData[0] = [];
+  // Flatten the CSV data
+  const maxRowLength = Math.max(...csvBodyArray.map(row => row.length));
+  csvBodyArray = csvBodyArray.map(row => {
+    return row.reduce((acc, cell, i) => {
+      const values = Array.isArray(cell) ? cell : [cell];
+      values.forEach((value, j) => {
+        if (!acc[j]) {
+          acc[j] = Array(maxRowLength).fill('');
         }
-        transposedData[0][index] = value === null ? '' : value;
+        acc[j][i] = value;
+      });
+      return acc;
+    }, []);
+  }).flat();
+
+  // Handle nested arrays and convert boolean and null values to strings
+  csvBodyArray = csvBodyArray.map(row => {
+    return row.map(cell => {
+      if (Array.isArray(cell)) {
+        return cell.join(',');
+      } else if (typeof cell === 'boolean' || cell === null) {
+        return String(cell);
       }
+      return cell;
     });
   });
 
-  return transposedData;
+  return csvBodyArray;
 }
 
 export default getBody;

@@ -10,8 +10,12 @@ function jsonToCsv(inputData: string | object, outputCsvFile?: string): string {
     const jsonString = fs.readFileSync(inputData, 'utf8');
     jsonContent = JSON.parse(jsonString);
   } else if (typeof inputData === 'object') {
-    // Convert JSON object to string
-    jsonContent = JSON.stringify(inputData);
+    jsonContent = inputData;
+  }
+
+  // Ensure jsonContent is an array
+  if (!Array.isArray(jsonContent)) {
+    jsonContent = [jsonContent];
   }
 
   const { csvHeadersArray, headers } = getHeaders(jsonContent);
@@ -21,7 +25,7 @@ function jsonToCsv(inputData: string | object, outputCsvFile?: string): string {
     .map((row: string[]) => row.join(","))
     .join("\n");
 
-    const csvBodyContent = csvBodyArray.map((row: string[]) => row.join(",")).join("\n");
+  const csvBodyContent = csvBodyArray.map((row: string[]) => row.join(",")).join("\n");
 
   const csvContent = csvHeaderContent + "\n\n" + csvBodyContent;
 

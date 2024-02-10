@@ -93,34 +93,33 @@ function arrangeHeaders(attributes: Attributes): string[][] {
 }
 
 function removeDuplicatesInSubArrays(csvArray: string[][]): void {
-  const uniqueValuesFirstSubArray = new Set<string>();
+  // Process each row
+  for (let i = 0; i < csvArray.length; i++) {
+    // Check if csvArray[i] is defined
+    if (csvArray[i]) {
+      const uniqueValues = new Set<string>();
 
-  // Process subsequent sub-arrays
-  for (let i = 1; i < csvArray.length; i++) {
-    const uniqueValues = new Set<string>();
+      csvArray[i].forEach((element, j) => {
+        // Check for duplicates within the row and reset if necessary
+        for (let k = j + 1; k < csvArray[i].length; k++) {
+          // Check if csvArray[i - 1] is defined
+          if (csvArray[i - 1] && element !== '' && element === csvArray[i][k] && csvArray[i - 1][k] === '') {
+            csvArray[i][k] = '';
+          }
+        }
 
-    csvArray[i].forEach((element, j) => {
-      // Check for duplicates within the sub-array fragment and reset if necessary
-      if (element !== '' && csvArray[i - 1][j] !== '') {
-        if (uniqueValues.has(element)) {
+        // Check for duplicates within the row and reset if necessary
+        if (element !== '' && uniqueValues.has(element)) {
           csvArray[i][j] = '';
         } else {
           uniqueValues.add(element);
         }
-      }
-    });
-  }
-  // Process the first sub-array
-  csvArray[0].forEach((element, j) => {
-    if (j > 0) {
-      if (uniqueValuesFirstSubArray.has(element)) {
-        csvArray[0][j] = '';
-      } else {
-        uniqueValuesFirstSubArray.add(element);
-      }
+      });
     }
-  });
+  }
 }
+
+
 
 function getHeaders(jsonObject: object): { csvHeadersArray: string[][]; headers: string[] } {
   const flattenedAttributes = flattenAttributes(jsonObject); // extract all attributes from the json object
