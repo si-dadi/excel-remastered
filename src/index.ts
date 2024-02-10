@@ -1,5 +1,6 @@
 import getHeaders from "./jsonToCsv/getHeaders";
 import getBody from "./jsonToCsv/getBody";
+import csvToJson from "./csvToJson/getJson";
 import fs from "fs";
 
 function jsonToCsv(inputData: string | object, outputCsvFile?: string): string {
@@ -39,6 +40,6 @@ function jsonToCsv(inputData: string | object, outputCsvFile?: string): string {
   }
 }
 
-const excelRemastered = { jsonToCsv };
+const excelRemastered = { jsonToCsv, csvToJson };
 
 export default excelRemastered;
